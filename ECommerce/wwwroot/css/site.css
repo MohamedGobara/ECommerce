@@ -29,3 +29,10 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* This targets the input only when you click/focus on it */
+.form-control:focus {
+    border-color: #28a745; /* Optional: Change border to green to match your button */
+    box-shadow: none; /* This removes the blue "glow" outline */
+    outline: 0 none; /* Double insurance to remove the browser outline */
+}

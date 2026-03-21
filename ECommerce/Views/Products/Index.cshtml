@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Product>
+
+
+@{
+
+    ViewData["Title"] = "Products Listing";
+}
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6 mb-4">
+            @* col-md-3 gives 4 cards per row for better spacing *@
+            <div class="card h-100 shadow-sm text-center">
+                @* text-center aligns everything, h-100 makes cards equal height *@
+
+                <div class="p-3">
+                    @* Adds padding around the image *@
+                    <img src="~/Images/@item.ImageURL"
+                         alt="@item.Name"
+                         class="img-fluid rounded"
+                         style="height: 200px; object-fit: contain;">
+                    @* img-fluid makes it responsive; object-fit: contain prevents stretching *@
+                </div>
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text text-muted small">@item.Description</p>
+                    <p class="card-text text-muted small">@item.Category.Name</p>
+                    <h6 class="mt-auto">@item.Price.ToString("C")</h6> @* "C" formats it as Currency *@
+
+                    <button class="btn btn-primary btn-success btn-sm mt-3">
+                        <i class="fas fa-cart-plus mr-1"></i> Add To Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
