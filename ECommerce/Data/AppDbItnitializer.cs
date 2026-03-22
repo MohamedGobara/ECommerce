@@ -1,4 +1,5 @@
-﻿using ECommerce.Models;
+﻿using ECommerce.Data.Enums;
+using ECommerce.Models;
 
 namespace ECommerce.Data
 {

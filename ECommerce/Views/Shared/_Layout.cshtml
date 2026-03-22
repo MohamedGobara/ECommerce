@@ -4,60 +4,146 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ECommerce</title>
-    <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ECommerce.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+    <style>
+        :root {
+            --primary-color: #1a1a1a; /* Sleek Black */
+            --accent-color: #ffd700; /* Gold accent for "Premium" feel */
+        }
+
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Modern Glass Navbar */
+        .navbar {
+            background: rgba(26, 26, 26, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: var(--accent-color) !important;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            margin: 0 10px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+            .nav-link:hover {
+                opacity: 1;
+                color: var(--accent-color) !important;
+            }
+
+        /* Stylish Search Bar */
+        .search-container .form-control {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .search-container .btn {
+            border-radius: 0 20px 20px 0;
+            background: var(--accent-color);
+            border: none;
+            color: black;
+        }
+
+        /* Main Content area */
+        main {
+            flex: 1;
+            padding-top: 2rem;
+        }
+
+        /* Designer Footer */
+        footer {
+            background: var(--primary-color);
+            color: #888;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-logo {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index">ECommerce</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+            <div class="container">
+                <a class="navbar-brand fw-bold" asp-controller="Products" asp-action="Index">
+                    <i class="fas fa-bolt me-2"></i>E-SHOP
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                        </li>
 
-                       
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Categories" asp-action="Index">Collections</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Products" asp-action="Index">Shop All</a>
+                        </li>
                     </ul>
-                    <form class="d-flex" style="padding-right:30px;">
-                        <input type="text" class="form-control me-2" placeholder="Search here..."/>
-                        <button type="submit"  class="btn btn-outline-success">
-                            <i class="fas fa-regular fa-search" >
 
-                            </i>
-
-                        </button>
-
+                    <form class="d-flex search-container w-25">
+                        <input class="form-control" type="search" placeholder="Search...">
+                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container-fluid">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <footer>
         <div class="container">
-            &copy; 2026 - ECommerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-md-start">
+                    <div class="footer-logo fw-bold">E-SHOP</div>
+                    <p class="small">Elevating your shopping experience since 2026.</p>
+                </div>
+                <div class="col-md-4 text-center my-3 my-md-0">
+                    <a href="#" class="text-decoration-none text-muted mx-2">FB</a>
+                    <a href="#" class="text-decoration-none text-muted mx-2">IG</a>
+                    <a href="#" class="text-decoration-none text-muted mx-2">TW</a>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <p class="mb-0 small">&copy; 2026 E-SHOP Global.</p>
+                    <a asp-action="Privacy" asp-controller="Home" class="text-muted small text-decoration-none">Legal & Privacy</a>
+                </div>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

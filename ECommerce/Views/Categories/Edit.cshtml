@@ -1,0 +1,55 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Edit Category";
+
+}
+
+
+<div class="container mt-5">
+    @* mt-5 adds top margin to the whole page *@
+    <div class="row justify-content-center">
+        @* This centers the column horizontally *@
+
+        <div class="col-md-6 shadow p-4 rounded bg-light">
+            @* col-md-6 is a better size for a form; shadow and background make it "pop" *@
+
+            <h2 class="text-center mb-4">@Model.Name</h2>
+
+            <form asp-action="Update">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    @* mb-3 adds standard spacing between rows *@
+                    <label asp-for="Name" class="form-label font-weight-bold"></label>
+                    <input asp-for="Name" value=@Model.Name class="form-control" placeholder="Enter category name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Description" class="form-label font-weight-bold"></label>
+                    <textarea  asp-for="Description" class="form-control" rows="3" placeholder="Describe the category...">@Model.Description</textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    @* Flexbox keeps buttons on the same line with space between *@
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                    <button type="submit" class="btn btn-success px-4" asp-route-Id="@Model.Id" asp-action="Update"> 
+                        Save Changes <i class="fas fa-save ms-1"></i>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+}

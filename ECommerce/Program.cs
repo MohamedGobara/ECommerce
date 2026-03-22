@@ -1,4 +1,5 @@
 using ECommerce.Data;
+using ECommerce.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("SQLServerConn");
 builder.Services.AddDbContext<ECommerceDBContext>(options => options.UseSqlServer(connectionString));
-
+builder.Services.AddScoped<CategoryServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
