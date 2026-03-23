@@ -9,6 +9,8 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("SQLServerConn");
 builder.Services.AddDbContext<ECommerceDBContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<CategoryServices>();
+builder.Services.AddScoped< ICategoryServices,CategoryServices>();
+builder.Services.AddScoped<IProductServices, ProductServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,0 +1,71 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = Model.Name;
+    // Check if ImageURL exists and starts with http (case-insensitive)
+    bool isExternal = Model.ImageURL?.Contains("http", StringComparison.OrdinalIgnoreCase) ?? true;
+
+    // Set the final source path
+    string imageSrc = isExternal ? Model.ImageURL : $"~/Images/{Model.ImageURL}";
+
+}
+
+
+<div class="container mt-5">
+    @* mt-5 adds top margin to the whole page *@
+    <div class="row justify-content-center">
+        @* This centers the column horizontally *@
+
+        <div class="col-md-6 shadow p-4 rounded bg-light">
+            @* col-md-6 is a better size for a form; shadow and background make it "pop" *@
+
+            <h2 class="text-center mb-4">@Model.Name</h2>
+
+            <form asp-action="Update">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+             
+                    @* col-md-3 gives 4 cards per row for better spacing *@
+                    <div class="card h-100 shadow-sm text-center">
+                        @* text-center aligns everything, h-100 makes cards equal height *@
+
+                        <div class="p-3">
+                            @* Adds padding around the image *@
+                            <img src="@imageSrc"
+                                 alt="@Model.Name"
+                                 class="img-fluid rounded"
+                                 style="height: 200px; object-fit: contain;">
+                            @* img-fluid makes it responsive; object-fit: contain prevents stretching *@
+                        </div>
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@Model.Name</h5>
+                            <p class="card-text text-muted small">@Model.Description</p>
+                            <p class="card-text text-muted small">@Model.Category.Name</p>
+                            <h6 class="mt-auto">@Model.Price.ToString("C")</h6> @* "C" formats it as Currency *@
+
+                            <button class="btn btn-primary btn-success btn-sm mt-3">
+                                <i class="fas fa-cart-plus mr-1"></i> Add To Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="padding:20px" class="d-flex justify-content-between"> 
+                        @* Flexbox keeps buttons on the same line with space between *@
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                        
+                    </div>
+</form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+}

@@ -1,5 +1,6 @@
 ﻿using ECommerce.Data.Base;
 using ECommerce.Data.Enums;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models
@@ -18,6 +19,7 @@ namespace ECommerce.Models
         public int CategoryId { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
+        [ValidateNever]
         public Category Category { get; set; }
     }
 }

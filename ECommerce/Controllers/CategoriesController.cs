@@ -10,7 +10,7 @@ namespace ECommerce.Controllers
     {
         
 
-        private readonly CategoryServices _categoryServices;
+        private readonly ICategoryServices _categoryServices;
         public CategoriesController(CategoryServices categoryServices)
         {
             _categoryServices = categoryServices;

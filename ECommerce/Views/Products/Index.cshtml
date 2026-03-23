@@ -4,24 +4,39 @@
 @{
 
     ViewData["Title"] = "Products Listing";
+
+
 }
 
 
 <div class="row">
     @foreach (var item in Model)
     {
+        // Check if ImageURL exists and starts with http (case-insensitive)
+
+        bool isExternal = item.ImageURL?.Contains("http", StringComparison.OrdinalIgnoreCase) ?? false;
+
+        // Set the final source path
+        string imageSrc = isExternal ? item.ImageURL : $"/Images/{item.ImageURL}";
+
+
         <div class="col-md-3 col-sm-6 mb-4">
             @* col-md-3 gives 4 cards per row for better spacing *@
             <div class="card h-100 shadow-sm text-center">
                 @* text-center aligns everything, h-100 makes cards equal height *@
 
                 <div class="p-3">
-                    @* Adds padding around the image *@
-                    <img src="~/Images/@item.ImageURL"
-                         alt="@item.Name"
-                         class="img-fluid rounded"
-                         style="height: 200px; object-fit: contain;">
-                    @* img-fluid makes it responsive; object-fit: contain prevents stretching *@
+
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @* Adds padding around the image *@
+                        <img src="@imageSrc"
+                             alt="@item.Name"
+                             class="img-fluid rounded"
+                             style="height: 200px; object-fit: contain;">
+                        @* img-fluid makes it responsive; object-fit: contain prevents stretching *@
+
+
+                    </a>
                 </div>
 
                 <div class="card-body d-flex flex-column">
@@ -38,3 +53,8 @@
         </div>
     }
 </div>
+
+@{ 
+    //CreateItem CreateItem
+    await Html.RenderPartialAsync("CreateItem", "Products");
+    }

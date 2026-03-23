@@ -9,93 +9,104 @@
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     <style>
         :root {
-            --primary-color: #1a1a1a; /* Sleek Black */
-            --accent-color: #ffd700; /* Gold accent for "Premium" feel */
+            --primary-dark: #121212;
+            --accent-gold: #ffd700;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
         }
 
         body {
-            background-color: #f4f7f6;
-            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* Modern Glass Navbar */
         .navbar {
-            background: rgba(26, 26, 26, 0.95) !important;
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            border-bottom: 2px solid var(--accent-color);
+            background: var(--primary-dark) ;
+            border-bottom: 2px solid var(--accent-gold);
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .navbar-brand {
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            color: var(--accent-color) !important;
-            text-transform: uppercase;
+            font-size: 1.7rem;
+            letter-spacing: 1.5px;
+            color: var(--accent-gold) ;
         }
 
         .nav-link {
-            color: #ffffff !important;
-            margin: 0 10px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            opacity: 0.8;
+            color: rgba(255,255,255,0.8) ;
+            font-weight: 500;
             transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.85rem;
         }
 
             .nav-link:hover {
-                opacity: 1;
-                color: var(--accent-color) !important;
+                color: var(--accent-gold) ;
             }
 
-        /* Stylish Search Bar */
         .search-container .form-control {
-            background: rgba(255,255,255,0.1);
+            background: var(--glass-bg);
             border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            border-radius: 20px 0 0 20px;
+            color: white ;
+            border-radius: 25px 0 0 25px;
+            padding-left: 1.2rem;
         }
+
+            .search-container .form-control::placeholder {
+                color: rgba(255, 255, 255, 0.5) ;
+                font-size: 0.9rem;
+            }
+
+            .search-container .form-control:focus {
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: none;
+                border-color: var(--accent-gold);
+            }
 
         .search-container .btn {
-            border-radius: 0 20px 20px 0;
-            background: var(--accent-color);
+            border-radius: 0 25px 25px 0;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            font-weight: bold;
             border: none;
-            color: black;
+            padding: 0 1.2rem;
         }
 
-        /* Main Content area */
         main {
-            flex: 1;
-            padding-top: 2rem;
+            flex: 1 0 auto;
+            padding: 2rem 0;
         }
 
-        /* Designer Footer */
         footer {
-            background: var(--primary-color);
-            color: #888;
-            padding: 3rem 0;
-            margin-top: 4rem;
+            flex-shrink: 0;
+            background: var(--primary-dark);
+            color: #adb5bd;
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .footer-logo {
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            color: var(--accent-gold);
+            font-size: 1.4rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container">
                 <a class="navbar-brand fw-bold" asp-controller="Products" asp-action="Index">
-                    <i class="fas fa-bolt me-2"></i>E-SHOP
+                    <i class="fas fa-shopping-cart me-2"></i>E-SHOP
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -109,9 +120,9 @@
                         </li>
                     </ul>
 
-                    <form class="d-flex search-container w-25">
-                        <input class="form-control" type="search" placeholder="Search...">
-                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                    <form class="d-flex search-container">
+                        <input class="form-control" type="search" placeholder="Search products..." aria-label="Search">
+                        <button class="btn shadow-none" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
@@ -123,20 +134,20 @@
     </main>
 
     <footer>
-        <div class="container">
+        <div class="container text-center text-md-start">
             <div class="row align-items-center">
-                <div class="col-md-4 text-center text-md-start">
-                    <div class="footer-logo fw-bold">E-SHOP</div>
-                    <p class="small">Elevating your shopping experience since 2026.</p>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="footer-logo fw-bold mb-2 text-uppercase">E-SHOP</div>
+                    <p class="small mb-0">High-quality products, delivered with care since 2026.</p>
                 </div>
-                <div class="col-md-4 text-center my-3 my-md-0">
-                    <a href="#" class="text-decoration-none text-muted mx-2">FB</a>
-                    <a href="#" class="text-decoration-none text-muted mx-2">IG</a>
-                    <a href="#" class="text-decoration-none text-muted mx-2">TW</a>
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <a href="#" class="text-white-50 mx-2 text-decoration-none"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-white-50 mx-2 text-decoration-none"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white-50 mx-2 text-decoration-none"><i class="fab fa-twitter"></i></a>
                 </div>
                 <div class="col-md-4 text-center text-md-end">
-                    <p class="mb-0 small">&copy; 2026 E-SHOP Global.</p>
-                    <a asp-action="Privacy" asp-controller="Home" class="text-muted small text-decoration-none">Legal & Privacy</a>
+                    <p class="mb-0 small">&copy; 2026 E-SHOP Global Inc.</p>
+                    <a asp-action="Privacy" asp-controller="Home" class="text-white-50 small text-decoration-none hover-white">Privacy & Terms</a>
                 </div>
             </div>
         </div>
