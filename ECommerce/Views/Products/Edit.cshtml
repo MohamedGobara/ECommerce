@@ -4,7 +4,7 @@
 
 @{
     ViewData["Title"] = "Create Product";
-    var AllCategories = new SelectList(ViewBag.Categories, "Id" , "Name"); 
+    var AllCategories = new SelectList(ViewBag.Categories, "Id", "Name");
 
 }
 
@@ -18,39 +18,39 @@
 
             <h2 class="text-center mb-4">Add New Product</h2>
 
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="mb-3">
                     @* mb-3 adds standard spacing between rows *@
                     <label asp-for="Name" class="form-label font-weight-bold"></label>
-                    <input asp-for="Name" class="form-control" placeholder="Enter category name" />
+                    <input asp-for="Name" value="@Model.Name" class="form-control" placeholder="Enter category name" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
                 <div class="mb-4">
                     <label asp-for="Description" class="form-label font-weight-bold"></label>
-                    <textarea asp-for="Description" class="form-control" placeholder="Describe the product..."/></textarea>
+                    <textarea asp-for="Description" class="form-control" placeholder="Describe the product..." />@Model.Description</textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
 
                 <div class="mb-4">
                     <label asp-for="Price" class="form-label font-weight-bold"></label>
-                    <input asp-for="Price" class="form-control"  placeholder="Enter the price"/>
+                    <input asp-for="Price" value="@Model.Price" class="form-control" placeholder="Enter the price" />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
 
                 <div class="mb-4">
                     <label asp-for="ImageURL" class="form-label font-weight-bold"></label>
-                    <input asp-for="ImageURL" class="form-control" placeholder="Enter Image Name"/>
+                    <input asp-for="ImageURL"value="@Model.ImageURL"  class="form-control" placeholder="Enter Image Name" />
                     <span asp-validation-for="ImageURL" class="text-danger"></span>
                 </div>
                 <div class="mb-4">
                     <label asp-for="Category" class="form-label font-weight-bold"></label>
-                   
-                    
-                    <select asp-for="CategoryId" asp-items="@AllCategories"    class="form-control"></select>
+
+
+                    <select asp-for="CategoryId" asp-items="@AllCategories" class="form-control" autofocus="@Model.CategoryId."></select>
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
                 </div>
 
@@ -61,7 +61,7 @@
                         <i class="fas fa-arrow-left"></i> Back to List
                     </a>
                     <button type="submit" class="btn btn-success px-4">
-                        Create <i class="fas fa-plus-circle ms-1"></i>
+                        Save Chnages <i class="fas fa-save ms-1"></i>
                     </button>
                 </div>
             </form>

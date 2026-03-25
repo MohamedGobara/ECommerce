@@ -65,5 +65,39 @@ namespace ECommerce.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            ViewBag.Categories = await _categoryServices.GettAllAsync();
+            var product = await _productServices.GetByIdAsync(id,(p)=>p.Category);
+         
+
+           return View(product);
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Product product)
+        {
+            await _productServices.UpdateAsync(product);
+
+
+            return RedirectToAction("Index");
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+
+            await _productServices.DeleteAsync(id);
+            return RedirectToAction("Index");
+
+        }
+
+
     }
 }

@@ -3,10 +3,12 @@
 @{
     ViewData["Title"] = Model.Name;
     // Check if ImageURL exists and starts with http (case-insensitive)
-    bool isExternal = Model.ImageURL?.Contains("http", StringComparison.OrdinalIgnoreCase) ?? true;
+
+    bool isExternal = Model.ImageURL?.Contains("http", StringComparison.OrdinalIgnoreCase) ?? false;
 
     // Set the final source path
-    string imageSrc = isExternal ? Model.ImageURL : $"~/Images/{Model.ImageURL}";
+    string imageSrc = isExternal ? Model.ImageURL : $"/Images/{Model.ImageURL}";
+
 
 }
 

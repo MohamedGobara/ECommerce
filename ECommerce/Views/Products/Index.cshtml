@@ -48,13 +48,71 @@
                     <button class="btn btn-primary btn-success btn-sm mt-3">
                         <i class="fas fa-cart-plus mr-1"></i> Add To Cart
                     </button>
+
+                    <div class="d-flex justify-content-center gap-2 mt-auto pt-3">
+                        <form asp-action="Edit" asp-route-id="@item.Id" method="get" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                                <i class="fas fa-pen fa-xs mr-1"></i> Edit
+                            </button>
+                        </form>
+
+                        <button type="button"
+                                class="btn btn-sm btn-outline-danger rounded-pill px-3"
+                                onclick="confirmDelete('@item.Id', '@item.Name')">
+                            <i class="fas fa-trash fa-xs mr-1"></i> Delete
+                        </button>
+                    </div>
+
+
+
                 </div>
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     }
 </div>
 
-@{ 
+@{
     //CreateItem CreateItem
     await Html.RenderPartialAsync("CreateItem", "Products");
+}
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function confirmDelete(id, name) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `You are about to delete "${name}". This cannot be undone!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true,
+            border: 'none',
+            customClass: {
+                popup: 'rounded-4 shadow-lg'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Creates a temporary form to submit the delete request securely
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/Products/Delete/${id}`;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        })
     }
+</script>
