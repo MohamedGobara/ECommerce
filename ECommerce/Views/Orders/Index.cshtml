@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Order>
+
+
+@{
+
+    ViewData["Title"] = "Listing All Orders";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <h2>All Orders</h2>
+        <hr />
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>User</th>
+
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+                
+                @foreach(var item in Model) { 
+                <tr>
+                    <td class="align-middle">@item.Id</td>
+                    <td class="align-middle">
+                        <ul>
+
+                            @foreach (var subItem in item.OrderItems)
+                            {
+
+                                <li>@subItem.Quantity - @subItem.Product.Name - @subItem.Price.ToString("c")</li>
+
+                            }
+                        </ul>
+
+
+                    </td>
+
+                    <td class="align-middle">
+
+                        @item.OrderItems.Select(x=> x.Quantity * x.Price).Sum().ToString("c")
+
+                    </td>
+                    <td>-</td>
+
+                </tr>
+                
+                
+                
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

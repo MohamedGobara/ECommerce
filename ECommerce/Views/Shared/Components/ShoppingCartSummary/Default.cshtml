@@ -1,0 +1,16 @@
+﻿@model int
+<li class="nav-item">
+    <a class="nav-link" style="color: var(--accent-gold);" asp-controller="Orders" asp-action="ShoppingCart">
+
+        <i class="fas fa-shopping-basket me-1"></i>
+
+        @if (Model > 0)
+        {
+
+            <span style="color: var(--accent-gold); font-weight: bold;">
+                @Model
+            </span>
+            <b style="color: var(--accent-gold); font-weight: bold;"> @(ViewBag.TotalAmount.ToString("c"))</b>
+        }
+    </a>
+</li>
