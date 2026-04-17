@@ -1,11 +1,15 @@
 ﻿using ECommerce.Data;
 using ECommerce.Data.Services;
+using ECommerce.Data.Static;
 using ECommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Controllers
 {
+
+    [Authorize(Roles =UserRoles.Admin)]
     public class ProductsController : Controller
     {
 
@@ -18,6 +22,7 @@ namespace ECommerce.Controllers
 
 
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var products = await _productServices.GettAllAsync(x => x.Category);

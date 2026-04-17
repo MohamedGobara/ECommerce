@@ -1,7 +1,10 @@
 ﻿@model string
 
-<div style="position: fixed; right: 30px; bottom: 170px; z-index: 1050;">
-    <a asp-action="Create" asp-controller="@Model" class="btn btn-success shadow-lg" title="Add New">
-        <i class="fas fa-plus-square m-2"></i>
-    </a>
-</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div style="position: fixed; right: 30px; bottom: 170px; z-index: 1050;">
+        <a asp-action="Create" asp-controller="@Model" class="btn btn-success shadow-lg" title="Add New">
+            <i class="fas fa-plus-square m-2"></i>
+        </a>
+    </div>
+}
