@@ -1,5 +1,7 @@
 ﻿using ECommerce.Data.Enums;
+using ECommerce.Data.Static;
 using ECommerce.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Data
 {
@@ -153,6 +155,73 @@ namespace ECommerce.Data
                 }
 
             }
+
+        }
+
+
+
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder builder) {
+            using ( var applicationServices = builder.ApplicationServices.CreateScope()) {
+
+                var roleManager = applicationServices.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                #region Role
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                }
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                }
+                #endregion
+
+                #region User
+                var userManager = applicationServices.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                if (await userManager.FindByEmailAsync("admin@admin.com")==null) {
+
+                    var AdminUser = new ApplicationUser()
+                    {
+                        Email = "admin@admin.com",
+                        EmailConfirmed = true,
+                        FullName = "Admin User",
+                        UserName = "Admin"
+                    };
+
+                    var result = await userManager.CreateAsync(AdminUser, "Admin@123");
+
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(AdminUser, UserRoles.Admin);
+                    }
+                }
+
+                if (await userManager.FindByEmailAsync("user@user.com") == null)
+                {
+
+                    var User = new ApplicationUser()
+                    {
+                        Email = "user@user.com",
+                        EmailConfirmed = true,
+                        FullName = "User",
+                        UserName = "User"
+                    };
+
+                    var result = await userManager.CreateAsync(User, "User@123");
+
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(User, UserRoles.User);
+                    }
+                }
+
+
+                #endregion
+
+
+            }
+
+
 
         }
 

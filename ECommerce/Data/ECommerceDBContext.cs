@@ -1,9 +1,10 @@
 ﻿using ECommerce.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Data
 {
-    public class ECommerceDBContext :DbContext
+    public class ECommerceDBContext :IdentityDbContext<ApplicationUser>
     {
         public ECommerceDBContext(DbContextOptions<ECommerceDBContext> options):base(options)
         {
